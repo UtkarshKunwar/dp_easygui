@@ -28,13 +28,19 @@ def pdfy(book_name):
     print("something related to PDFs")
     return
 
-def textify(num_pages):
+def textify(book_name, num_pages):
     #Insert code to convert images to text here.
     for i in range(num_pages):
         if i % 2 == 0:
             os.system('tesseract ~/img/%d.jpg ~/img/%d.txt' % (i, i))
         else:
             os.system('ssh uk@192.168.1.102 \'tesseract ~/img/%d.jpg ~/img/%d.txt\'' % (i, i))
+
+    os.system('scp uk@192.168.1.102 ~/img/*.txt ~/img/')
+    os.system('ssh uk@192.168.1.102 \'rm -rf ~/img/*.txt\'')
+
+    for i in range(num_pages):
+        os.system('cat %d.txt >> %s.txt' % (i, book_name))
 
     print("something related to text")
     return
@@ -125,7 +131,7 @@ def main():
 
     image_process(book_pages)
 
-    textify(book_pages)
+    textify(book_name, book_pages)
 
     if "PDF" in selected_choices:
         pdfy(book_name)
