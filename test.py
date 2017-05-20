@@ -1,4 +1,5 @@
 import easygui
+import os
 import sys
 
 def select_choice(name):
@@ -59,6 +60,10 @@ def audiofy():
     # print("something related to audio")
     return
 
+def snap(num_pages):
+    os.system('../pi-snapper/snap %d' % (num_pages))
+    return
+
 def main():
 
     book_name = easygui.enterbox("Enter Book Name", "Book Name")
@@ -78,15 +83,15 @@ def main():
         else:
             break
 
+    snap(book_pages)
+
+    textify()
 
     if "Translation" in selected_choices:
         translate()
 
     if "Audio Generation" in selected_choices:
         audiofy()
-
-    if "Text Generation" in selected_choices:
-        textify()
 
     if "PDF" in selected_choices:
         pdfy()
