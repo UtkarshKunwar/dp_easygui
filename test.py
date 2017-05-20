@@ -40,7 +40,7 @@ def textify(book_name, num_pages):
     os.system('ssh uk@192.168.1.102 \'rm -rf ~/img/*.txt\'')
 
     for i in range(num_pages):
-        os.system('cat %d.txt >> %s.txt' % (i, book_name))
+        os.system('cat ~/img/%d.txt >> ~/%s.txt' % (i, book_name))
 
     print("something related to text")
     return
@@ -88,7 +88,7 @@ def audiofy(book_name):
             'Italian' : 'it-IT'
             }
 
-    os.system('~/ira-book-scanner/txt2wave/txt2wave.py -i %s.txt -l %s' % (book_name, lang_dict[choice]))
+    os.system('~/ira-book-scanner/txt2wave/txt2wave.py -i ~/%s.txt -l %s' % (book_name, lang_dict[choice]))
     # print("something related to audio")
     return
 
