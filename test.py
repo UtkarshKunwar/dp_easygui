@@ -64,7 +64,7 @@ def translate():
     # print("something related to translate")
     return
 
-def audiofy():
+def audiofy(book_name):
     #Insert code to convert text to mp3 here.
     msg = "Choose any following language for an audio format : "
     title = "Select Language for audio"
@@ -72,11 +72,22 @@ def audiofy():
     choice = easygui.choicebox(msg, title, choices)
     easygui.msgbox("Generating audio file in " + choice + " language...")
     easygui.msgbox("Audio file generated.", "Done")
+
+    lang_dict = {
+            'English - GB (default)' : 'en-GB',
+            'English - US' : 'en-US',
+            'German' : 'de-DE',
+            'Spanish' : 'es-ES',
+            'French' : 'fr-FR',
+            'Italian' : 'it-IT'
+            }
+
+    os.system('~/ira-book-scanner/txt2wave/txt2wave.py -i %s.txt -l %s' % (book_name, lang_dict[choice]))
     # print("something related to audio")
     return
 
 def snap(num_pages):
-    os.system('../pi-snapper/snap %d' % (num_pages))
+    os.system('~/ira-book-scanner/pi-snapper/snap %d' % (num_pages))
     return
 
 def image_process(num_pages):
@@ -123,7 +134,7 @@ def main():
         translate()
 
     if "Audio Generation" in selected_choices:
-        audiofy()
+        audiofy(book_name)
 
     # if selected_choices:
     #     for choice in selected_choices:
