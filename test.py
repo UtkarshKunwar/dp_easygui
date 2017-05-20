@@ -64,13 +64,15 @@ def snap(num_pages):
     os.system('../pi-snapper/snap %d' % (num_pages))
     return
 
+def image_process():
+    os.system('mogrify -colorspace GRAY ~/img/*.*')
+
 def main():
 
     book_name = easygui.enterbox("Enter Book Name", "Book Name")
     if book_name == "":
         easygui.msgbox("No book name given.", "Error")
         exit()
-    given_choices, selected_choices = select_choice(book_name)
 
     book_pages=-1
     while True:
@@ -83,7 +85,14 @@ def main():
         else:
             break
 
+    given_choices, selected_choices = select_choice(book_name)
+
     snap(book_pages)
+
+    if "PDF" in selected_choices:
+        pdfy()
+
+    image_process()
 
     textify()
 
@@ -92,9 +101,6 @@ def main():
 
     if "Audio Generation" in selected_choices:
         audiofy()
-
-    if "PDF" in selected_choices:
-        pdfy()
 
     # if selected_choices:
     #     for choice in selected_choices:
