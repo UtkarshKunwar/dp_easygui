@@ -12,23 +12,32 @@ def select_choice(name):
 def job_in_progress(choice):
     text = choice + " in progress..."
     easygui.textbox(text = text)
+    return
 
 def job_done(choice):
     easygui.textbox(text = choice + " completed.")
+    return
 
-def pdfy():
+def pdfy(book_name):
     #Insert code to convert images to PDF here.
+    os.system('scp uk@192.168.1.102:~/img/*.jpg ~/img/')
+    os.system('ssh uk@192.168.1.102 \'rm -rf ~/img/*.jpg\'')
+
+    os.system(r'ls ~/img/*.jpg | sort -n | tr \'\n\' \' \' | sed \'s/$/\ ~/%s.pdf/\' | xargs convert' % (book_name))
+    os.system('rm -rf ~/img/*.jpg')
     print("something related to PDFs")
+    return
 
 def textify(num_pages):
     #Insert code to convert images to text here.
     for i in range(num_pages):
         if i % 2 == 0:
-            os.system('tesseract %d.jpg %d.txt' % (i, i))
+            os.system('tesseract ~/img/%d.jpg ~/img/%d.txt' % (i, i))
         else:
-            os.system('ssh uk@192.168.1.102 \'tesseract %d.jpg %d.txt\'' % (i, i))
+            os.system('ssh uk@192.168.1.102 \'tesseract ~/img/%d.jpg ~/img/%d.txt\'' % (i, i))
 
     print("something related to text")
+    return
 
 def translate_regions(choice):
     title = "Select Language for translation"
@@ -52,8 +61,8 @@ def translate():
     lang = translate_regions(choice)
     easygui.msgbox("Translating to " + lang + " language...")
     easygui.msgbox("Translation completed.", "Done")
-    return
     # print("something related to translate")
+    return
 
 def audiofy():
     #Insert code to convert text to mp3 here.
@@ -75,9 +84,11 @@ def image_process(num_pages):
 
     for i in range(num_pages):
         if i % 2 == 0:
-            os.system('~/ira-book-scanner/dp_easygui/textcleaner %d.jpg %d.jpg' % (i, i))
+            os.system('~/ira-book-scanner/dp_easygui/textcleaner ~/img/%d.jpg ~/img/%d.jpg' % (i, i))
         else:
-            os.system('ssh uk@192.168.1.102 \'~/ira-book-scanner/dp_easygui/textcleaner %d.jpg %d.jpg\'' % (i, i))
+            os.system('ssh uk@192.168.1.102 \'~/ira-book-scanner/dp_easygui/textcleaner ~/img/%d.jpg ~/img/%d.jpg\'' % (i, i))
+
+    return
 
 def main():
 
@@ -101,12 +112,12 @@ def main():
 
     snap(book_pages)
 
-    if "PDF" in selected_choices:
-        pdfy()
-
     image_process(book_pages)
 
     textify(book_pages)
+
+    if "PDF" in selected_choices:
+        pdfy(book_name)
 
     if "Translation" in selected_choices:
         translate()
