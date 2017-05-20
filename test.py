@@ -247,6 +247,7 @@ def main():
 
     given_choices, selected_choices = select_choice(book_name)
 
+    os.system('ssh uk@192.168.1.2 \'cd arduino/ira/ && ino build && ino upload && cd\'')
     snap(book_pages)
 
     image_process(book_pages)
