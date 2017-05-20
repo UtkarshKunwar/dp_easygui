@@ -20,8 +20,14 @@ def pdfy():
     #Insert code to convert images to PDF here.
     print("something related to PDFs")
 
-def textify():
+def textify(num_pages):
     #Insert code to convert images to text here.
+    for i in range(num_pages):
+        if i % 2 == 0:
+            os.system('tesseract %d.jpg %d.txt' % (i, i))
+        else:
+            os.system('ssh uk@192.168.1.102 \'tesseract %d.jpg %d.txt\'' % (i, i))
+
     print("something related to text")
 
 def translate_regions(choice):
@@ -100,7 +106,7 @@ def main():
 
     image_process(book_pages)
 
-    textify()
+    textify(book_pages)
 
     if "Translation" in selected_choices:
         translate()
