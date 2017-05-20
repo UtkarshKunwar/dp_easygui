@@ -49,23 +49,143 @@ def translate_regions(choice):
     title = "Select Language for translation"
     if choice == "Indian Languages":
         msg = "Choose any following Indian Language for translation : "
-        choices = ["Bengali", "English", "Gujarati", "Hindi", "Kannada", "Malayalam", "Marathi", "Punjabi", "Sindhi", "Tamil", "Telugu"]
+        choices = ["Bengali", "English", "Gujarati", "Hindi", "Kannada", "Malayalam", "Marathi", "Punjabi", "Sindhi", "Tamil", "Telugu", "Urdu"]
         lang_choice = easygui.choicebox(msg, title, choices)
         return lang_choice
     else:
-        msg = "Choose any following Indian Language for translation : "
-        choices = ["German", "French", "Italian"]
+        msg = "Choose any following Foreign Language for translation : "
+        choices = ["Afrikaans", "Amharic", "Arabic", "Azerbaijani", "Belarusian", "Bulgarian", "Bosnian", "Catalan", "Cebuano", "Corsican", "Czech", "Welsh", "Danish", "German", "Greek", "English", "Esperanto", "Spanish", "Estonian", "Basque", "Persian", "Finnish", "Fijian", "French", "Frisian", "Irish", "Scots Gaelic", "Galician", "Hausa", "Hawaiian", "Hebrew", "Hmong", "Croatian", "Haitian Creole", "Hungarian", "Armenian", "Indonesian", "Igbo", "Icelandic", "Italian", "Japanese", "Javanese", "Georgian", "Kazakh", "Khmer", "Korean", "Kurdish", "Kyrgyz", "Latin", "Luxembourgish", "Lao", "Lithuanian", "Latvian", "Malagasy", "Maori", "Macedonian", "Mongolian", "Malay", "Maltese", "Hmong Daw", "Myanmar", "Nepali", "Dutch", "Norwegian", "Chichewa", "Queretaro Otomi", "Polish", "Pashto", "Portuguese", "Romanian", "Russian", "Sinhala", "Slovak", "Slovenian", "Samoan", "Shona", "Somali", "Albanian", "Sesotho", "Sundanese", "Swedish", "Swahili", "Tajik", "Thai", "Filipino", "Klingon", "Tongan", "Turkish", "Tatar", "Tahitian", "Udmurt", "Ukrainian", "Uzbek", "Vietnamese", "Xhosa", "Yiddish", "Yoruba", "Yucatec Maya", "Cantonese", "Chinese Simplified", "Chinese Traditional", "Zulu"]
         lang_choice = easygui.choicebox(msg, title, choices)
         return lang_choice
 
-def translate():
+def translate(book_name):
     #Insert code to translate text here.
     title = "Select Language for translation"
     msg = "Choose any region for the language selection."
     choices = ["Foreign Languages", "Indian Languages"]
     choice = easygui.choicebox(msg, title, choices)
     lang = translate_regions(choice)
+
+    lang_dict = {
+            "Afrikaans" : "af",
+            "Amharic" : "am",
+            "Arabic" : "ar",
+            "Azerbaijani" : "az",
+            "Belarusian" : "be",
+            "Bulgarian" : "bg",
+            "Bengali" : "bn",
+            "Bosnian" : "bs",
+            "Catalan" : "ca",
+            "Cebuano" : "ceb",
+            "Corsican" : "co",
+            "Czech" : "cs",
+            "Welsh" : "cy",
+            "Danish" : "da",
+            "German" : "de",
+            "Greek" : "el",
+            "English" : "en",
+            "Esperanto" : "eo",
+            "Spanish" : "es",
+            "Estonian" : "et",
+            "Basque" : "eu",
+            "Persian" : "fa",
+            "Finnish" : "fi",
+            "Fijian" : "fj",
+            "French" : "fr",
+            "Frisian" : "fy",
+            "Irish" : "ga",
+            "Scots Gaelic" : "gd",
+            "Galician" : "gl",
+            "Gujarati" : "gu",
+            "Hausa" : "ha",
+            "Hawaiian" : "haw",
+            "Hebrew" : "he",
+            "Hindi" : "hi",
+            "Hmong" : "hmn",
+            "Croatian" : "hr",
+            "Haitian Creole" : "ht",
+            "Hungarian" : "hu",
+            "Armenian" : "hy",
+            "Indonesian" : "id",
+            "Igbo" : "ig",
+            "Icelandic" : "is",
+            "Italian" : "it",
+            "Japanese" : "ja",
+            "Javanese" : "jv",
+            "Georgian" : "ka",
+            "Kazakh" : "kk",
+            "Khmer" : "km",
+            "Kannada" : "kn",
+            "Korean" : "ko",
+            "Kurdish" : "ku",
+           "Kyrgyz" : "ky",
+           "Latin" : "la",
+           "Luxembourgish" : "lb",
+           "Lao" : "lo",
+           "Lithuanian" : "lt",
+           "Latvian" : "lv",
+           "Malagasy" : "mg",
+           "Maori" : "mi",
+           "Macedonian" : "mk",
+           "Malayalam" : "ml",
+           "Mongolian" : "mn",
+           "Marathi" : "mr",
+           "Malay" : "ms",
+           "Maltese" : "mt",
+           "Hmong Daw" : "mww",
+           "Myanmar" : "my",
+           "Nepali" : "ne",
+           "Dutch" : "nl",
+           "Norwegian" : "no",
+           "Chichewa" : "ny",
+           "Queretaro Otomi" : "otq",
+           "Punjabi" : "pa",
+           "Polish" : "pl",
+           "Pashto" : "ps",
+           "Portuguese" : "pt",
+           "Romanian" : "ro",
+           "Russian" : "ru",
+           "Sindhi" : "sd",
+           "Sinhala" : "si",
+           "Slovak" : "sk",
+           "Slovenian" : "sl",
+           "Samoan" : "sm",
+           "Shona" : "sn",
+           "Somali" : "so",
+           "Albanian" : "sq",
+           "Serbian (Cyrillic)" : "sr-Cyrl",
+           "Serbian (Latin)" : "sr-Latn",
+           "Sesotho" : "st",
+           "Sundanese" : "su",
+           "Swedish" : "sv",
+           "Swahili" : "sw",
+           "Tamil" : "ta",
+           "Telugu" : "te",
+           "Tajik" : "tg",
+           "Thai" : "th",
+           "Filipino" : "tl",
+           "Klingon" : "tlh",
+           "Klingon (plqaD)" : "tlh-Qaak",
+           "Tongan" : "to",
+           "Turkish" : "tr",
+           "Tatar" : "tt",
+           "Tahitian" : "ty",
+           "Udmurt" : "udm",
+           "Ukrainian" : "uk",
+           "Urdu" : "ur",
+           "Uzbek" : "uz",
+           "Vietnamese" : "vi",
+           "Xhosa" : "xh",
+           "Yiddish" : "yi",
+           "Yoruba" : "yo",
+           "Yucatec Maya" : "yua",
+           "Cantonese" : "yue",
+           "Chinese Simplified" : "zh-CN",
+           "Chinese Traditional" : "zh-TW",
+           "Zulu" : "zu"
+    }
     easygui.msgbox("Translating to " + lang + " language...")
+    os.system('~/ira-book-scanner/translator/translate-shell -b -i ~/%s.txt en: :%s -o ~/%s_%s.txt' % (book_name, lang_dict[lang], book_name, lang_dict[lang]))
     easygui.msgbox("Translation completed.", "Done")
     # print("something related to translate")
     return
@@ -137,7 +257,7 @@ def main():
         pdfy(book_name)
 
     if "Translation" in selected_choices:
-        translate()
+        translate(book_name)
 
     if "Audio Generation" in selected_choices:
         audiofy(book_name)
