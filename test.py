@@ -64,8 +64,14 @@ def snap(num_pages):
     os.system('../pi-snapper/snap %d' % (num_pages))
     return
 
-def image_process():
+def image_process(num_pages):
     os.system('mogrify -colorspace GRAY ~/img/*.*')
+
+    for i in range(num_pages):
+        if i % 2 == 0:
+            os.system('~/ira-book-scanner/dp_easygui/textcleaner %d.jpg %d.jpg' % (i, i))
+        else:
+            os.system('ssh uk@192.168.1.102 \'~/ira-book-scanner/dp_easygui/textcleaner %d.jpg %d.jpg\'' % (i, i))
 
 def main():
 
@@ -92,7 +98,7 @@ def main():
     if "PDF" in selected_choices:
         pdfy()
 
-    image_process()
+    image_process(book_pages)
 
     textify()
 
